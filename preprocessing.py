@@ -75,3 +75,24 @@ def df_to_X_single_sample(df, window_size=5):
     return X_single.reshape(X_single.shape[0],-1)
 
 
+def process_input_data(date_list,time_list,global_active_power_list, global_reactive_power_list,
+                        voltage_list, global_intensity_list, sub_metering_1_list, sub_metering_2_list, sub_metering_3_list):
+    
+    '''
+    Converts to form data into the required format for processing
+    '''
+    
+    data = []
+    for i in range(5):
+        data.append({
+            "Date": date_list[i],
+            "Time": time_list[i],
+            "Global_active_power": global_active_power_list[i],
+            "Global_reactive_power": global_reactive_power_list[i],
+            "Voltage": voltage_list[i],
+            "Global_intensity": global_intensity_list[i],
+            "Sub_metering_1": sub_metering_1_list[i],
+            "Sub_metering_2": sub_metering_2_list[i],
+            "Sub_metering_3": sub_metering_3_list[i]
+        })
+    return data

@@ -1,3 +1,43 @@
-<h1>
-Hello World
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Household Power Consumption Prediction</title>
+</head>
+<body>
+    <h1>Enter Data for the last 5 hours</h1>
+    <form action='{{ url_for('predict')}}' method="POST">
+        {% for i in range(1, 6) %}
+        <h3>Data for Hour {{ 6 - i }} </h3>
+        <label for="date{{ i }}">Date (DD/MM/YYYY):</label>
+        <input type="text" id="date{{ i }}" name="date{{ i }}" required><br><br>
+
+        <label for="time{{ i }}">Time (HH:MM:SS):</label>
+        <input type="text" id="time{{ i }}" name="time{{ i }}" required><br><br>
+
+        <label for="global_active_power{{ i }}">Global Active Power:</label>
+        <input type="number" step="any" id="global_active_power{{ i }}" name="global_active_power{{ i }}" required><br><br>
+
+        <label for="sub_metering_1{{ i }}">Sub Metering 1:</label>
+        <input type="number" step="any" id="sub_metering_1{{ i }}" name="sub_metering_1{{ i }}" required><br><br>
+
+        <label for="sub_metering_2{{ i }}">Sub Metering 2:</label>
+        <input type="number" step="any" id="sub_metering_2{{ i }}" name="sub_metering_2{{ i }}" required><br><br>
+
+        <label for="sub_metering_3{{ i }}">Sub Metering 3:</label>
+        <input type="number" step="any" id="sub_metering_3{{ i }}" name="sub_metering_3{{ i }}" required><br><br>
+        {% endfor %}
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <br>
+    <br>
+
+    {{prediction_text}}
+
+
+</body>
+</html>
+
