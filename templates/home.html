@@ -6,10 +6,11 @@
     <title>Household Power Consumption Prediction</title>
 </head>
 <body>
-    <h1>Enter Data for the last 5 hours</h1>
-    <form action='{{ url_for('predict')}}' method="POST">
+    <h1>Enter Data for the Last 5 Hours</h1>
+    <form action="{{ url_for('predict')}}" method="POST">
         {% for i in range(1, 6) %}
-        <h3>Data for Hour {{ 6 - i }} </h3>
+        <h3>Data for Hour {{ 6 - i }}</h3>
+
         <label for="date{{ i }}">Date (DD/MM/YYYY):</label>
         <input type="text" id="date{{ i }}" name="date{{ i }}" required><br><br>
 
@@ -18,6 +19,15 @@
 
         <label for="global_active_power{{ i }}">Global Active Power:</label>
         <input type="number" step="any" id="global_active_power{{ i }}" name="global_active_power{{ i }}" required><br><br>
+
+        <label for="global_reactive_power{{ i }}">Global Reactive Power:</label>
+        <input type="number" step="any" id="global_reactive_power{{ i }}" name="global_reactive_power{{ i }}" required><br><br>
+
+        <label for="voltage{{ i }}">Voltage:</label>
+        <input type="number" step="any" id="voltage{{ i }}" name="voltage{{ i }}" required><br><br>
+
+        <label for="global_intensity{{ i }}">Global Intensity:</label>
+        <input type="number" step="any" id="global_intensity{{ i }}" name="global_intensity{{ i }}" required><br><br>
 
         <label for="sub_metering_1{{ i }}">Sub Metering 1:</label>
         <input type="number" step="any" id="sub_metering_1{{ i }}" name="sub_metering_1{{ i }}" required><br><br>
@@ -32,12 +42,8 @@
         <button type="submit">Predict</button>
     </form>
 
-    <br>
-    <br>
-
-    {{prediction_text}}
-
-
+    <br><br>
+    {{ prediction_text }}
 </body>
 </html>
 

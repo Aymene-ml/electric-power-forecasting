@@ -5,7 +5,7 @@ from preprocessing import *
 app = Flask(__name__)
 
 # Load the model
-with open('model.pkl','rb') as f:
+with open('gb_regressor_model.pkl','rb') as f:
     model = pickle.load(f)
 
 @app.route('/')
@@ -44,7 +44,7 @@ def predict():
     data = process_input_data(date_list,time_list,global_active_power_list,global_reactive_power_list,voltage_list,global_intensity_list,sub_metering_1_list,sub_metering_2_list,sub_metering_3_list)
     df = process_time_series_data(data)
     input_sample = df_to_X_single_sample(df,5)
-    output = model.predict(input_sample)[0]
+    output = round(model.predict(input_sample)[0],3)
     return render_template('home.html',prediction_text=f'The consumed power for the next hour prediction is {output}')
 if __name__ == '__main__':
     app.run(debug=True)   
