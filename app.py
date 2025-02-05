@@ -16,16 +16,9 @@ def home():
 def predict_api():
     try:
         data = request.json['data']
-        print(data)
-        print('Date received')
         df = process_time_series_data(data)
-        print('data processed')
         input_sample = df_to_X_single_sample(df,window_size=5)
-        print('input get ready')
-        print('model predicting...')
         output = model.predict(input_sample)[0]
-        
-        print(f'output:{output}')
         return jsonify({'output':round(output,3)}),200
     except Exception as e:
         return jsonify({'error':str(e)}), 400    
